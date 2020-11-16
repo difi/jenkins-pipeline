@@ -327,6 +327,10 @@ boolean apiTestsSupported(def environmentId) {
         echo "Verification tests are not supported (no /docker/stack-api-tests.yml)"
         return false
     }
-
+    status = sh(returnStatus: true, script: "[ echo \$?\n ]")
+    if (status != 0){
+        echo "Verification tests failed"
+        return false
+    }
     true
 }
